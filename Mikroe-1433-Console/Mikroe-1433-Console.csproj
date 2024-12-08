@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Mikroe_1433_Console</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mikroe-1433-Extensions\Mikroe-1433-Extensions.csproj" />
+    <ProjectReference Include="..\Mikroe-1433\Mikroe-1433.csproj" />
+  </ItemGroup>
+
+</Project>
