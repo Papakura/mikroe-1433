@@ -11,9 +11,9 @@ namespace Mikroe.Click
     {
         Ft2232HDevice? _channelA;
         Ft2232HDevice? _channelB;
-        private GpioController _channelAController;
-        private GpioController _channelBController;
-        private GpioPin _led;
+        private GpioController? _channelAController;
+        private GpioController? _channelBController;
+        private GpioPin? _led;
         public Result Open()
         {
             var devices = Ft2232HDevice.GetFt2232H();
@@ -22,15 +22,15 @@ namespace Mikroe.Click
                 return Result.NotFound();
             }
             _channelA = devices.FirstOrDefault(static d => d.Channel == FtChannel.A);
-            _channelAController = _channelA.CreateGpioController();
+            _channelAController = _channelA?.CreateGpioController();
             _channelB = devices.FirstOrDefault(static d => d.Channel == FtChannel.B);
-            _channelBController = _channelB.CreateGpioController();
-            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelA.Channel}CBUS4");
-            _led = _channelAController.OpenPin(gpio);
-            _led.Write(PinValue.High);
-            _led.SetPinMode(PinMode.Output);
-            _led.Write(PinValue.Low);
-            _led.Write(PinValue.High);
+            _channelBController = _channelB?.CreateGpioController();
+            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelA?.Channel}CBUS4");
+            _led = _channelAController?.OpenPin(gpio);
+            _led?.Write(PinValue.High);
+            _led?.SetPinMode(PinMode.Output);
+            _led?.Write(PinValue.Low);
+            _led?.Write(PinValue.High);
             return Result.Success();
 
         }
@@ -85,31 +85,31 @@ namespace Mikroe.Click
             return _led;
         }
 
-        public GpioPin GetResetPin()
+        public GpioPin? GetResetPin()
         {
-            var controller = _channelB.CreateGpioController();
-            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB.Channel}CBUS1");
-            var pin = controller.OpenPin(gpio);
-            pin.SetPinMode(PinMode.Output);
+            var controller = _channelB?.CreateGpioController();
+            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB?.Channel}CBUS1");
+            var pin = controller?.OpenPin(gpio);
+            pin?.SetPinMode(PinMode.Output);
             return pin;
         }
 
-        public GpioPin GetInterrupt(PinMode mode, Action<object, PinValueChangedEventArgs> onInterrupt)
+        public GpioPin? GetInterrupt(PinMode mode, Action<object, PinValueChangedEventArgs> onInterrupt)
         {
-            var controller = _channelB.CreateGpioController();
-            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB.Channel}CBUS2");
-            var pin = controller.OpenPin(gpio);
-            pin.SetPinMode(mode);
-            pin.ValueChanged += (s,e) => onInterrupt(s,e);
+            var controller = _channelB?.CreateGpioController();
+            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB?.Channel}CBUS2");
+            var pin = controller?.OpenPin(gpio);
+            pin?.SetPinMode(mode);
+            pin!.ValueChanged += (s,e) => onInterrupt(s,e);
             return pin;
         }
 
-        public GpioPin GetPwm()
+        public GpioPin? GetPwm()
         {
-            var controller = _channelB.CreateGpioController();
-            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB.Channel}CBUS3");
-            var pin = controller.OpenPin(gpio);
-            pin.SetPinMode(PinMode.Output);
+            var controller = _channelB?.CreateGpioController();
+            int gpio = Ft2232HDevice.GetPinNumberFromString($"{_channelB?.Channel}CBUS3");
+            var pin = controller?.OpenPin(gpio);
+            pin?.SetPinMode(PinMode.Output);
             return pin;
         }
 
