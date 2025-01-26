@@ -1,0 +1,18 @@
+﻿services:
+  workerservice:
+    image: workerservice
+    build:
+      context: .
+      dockerfile: WorkerService/Dockerfile
+
+  deviceserver:
+    image: deviceserver
+    build:
+      context: .
+      dockerfile: DeviceServer/Dockerfile
+
+  deviceserver2:
+    image: deviceserver2
+    build:
+      context: .
+      dockerfile: DeviceServer2/Dockerfile
