@@ -1,5 +1,4 @@
 using FastEndpoints;
-using Microsoft.AspNetCore.Mvc;
 
 namespace DeviceServer;
 
@@ -8,7 +7,15 @@ public class DevicesEndpoint : EndpointWithoutRequest<IEnumerable<string>>
     public override void Configure()
     {
         Get("api/devices");
-        Description(b =>b.Produces<string[]>(StatusCodes.Status200OK));
+        Description(b =>
+        {
+            b.Produces<string[]>(StatusCodes.Status200OK)
+                .WithTags("Devices");
+        });
+        Summary(s =>
+        {
+            s.Summary = "Get all devices";
+        });
         AllowAnonymous();
     }
 
